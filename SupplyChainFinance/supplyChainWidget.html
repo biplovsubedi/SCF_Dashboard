@@ -1,46 +1,47 @@
-<div class="col-md-6">
-  <div class="panel panel-default">
-      <div class="panel-heading">
-          <i class="fa fa-bar-chart-o fa-fw"></i><b> Supply Chain</b>
-      </div>
-      <div  ng-cloak class="panel-body">
-          <!-- <div id="morris-donut-chart"></div>
-          <a href="#" class="btn btn-default btn-block">View Details</a> -->
-              <div ng-show="displaySCF" class="">
-
-                <div class=" chart-div">
-                    <div id="dual_x_div" style=""></div>
+<div class="panel panel-default">
+        <div class="panel-heading">
+            <i class="fa fa-bar-chart-o fa-fw"></i><b> Supply Chain Finance</b>
+        </div>
+        <div ng-cloak class="panel-body">
+            <div ng-show="displaySCF" class="">
+                <div ng-if="outputvalid != 'true'">
+                    <center>
+                        <p style="font-size: 14; font-family: 'Roboto'; margin-bottom: 0px;">No Account Available</p>
+                    </center>
                 </div>
+                <div ng-if="outputvalid == 'true'">
 
-                <div class="row">
-                    <div class="small-box bg-blue mybox data-div-inner-scf">
-                        <div class="inner">
+                    <div class=" chart-div">
+                        <div id="dual_x_div" style=""></div>
+                    </div>
+
+                    <div class="row center" style="margin-left: 15px;">
+                        <div class="col-md-3  small-box bg-blue  data-div-inner-scf">
                             <h4>£ {{ outputdatatotal }} </h4>
                             <p>Total Discounted</p>
-                        </div>
 
-                    </div>
-                    <div class="small-box bg-blue mybox data-div-inner-scf">
-                        <div class="inner">
+                        </div>
+                        <div class="col-md-3 small-box bg-blue  data-div-inner-scf">
                             <h4>£ {{ outputdatalast }} </h4>
-                            <p>Invoices Paid Last Month</p>
-                        </div>
+                            <p>Paid Last Month</p>
 
-                    </div>
-                    <div class="small-box bg-blue mybox data-div-inner-scf">
-                        <div class="inner">
+                        </div>
+                        <div class="col-md-3 small-box bg-blue  data-div-inner-scf">
                             <h4>£ {{ outputdatapending }} </h4>
-                            <p>Pending Payments (Future Exposure)</p>
+                            <p>Pending Payments</p>
+
                         </div>
-
                     </div>
-                </div>
 
-              </div>
-              <input type="hidden" id="total_discounted" ng-model="outputdatatotal">
-              <input type="hidden" id="last_month" ng-model="outputdatalast">
-              <input type="hidden" id="pending_payments" ng-model="outputdatapending">
-          </div>
-      <!-- /.panel-body -->
-  </div>
+                </div>
+            </div>
+
+            <input type="hidden" id="total_discounted" ng-model="outputdatatotal">
+            <input type="hidden" id="last_month" ng-model="outputdatalast">
+            <input type="hidden" id="pending_payments" ng-model="outputdatapending">
+        </div>
+        <!-- /.panel-body -->
+    </div><!--end of panel-->
+    <!-- MAIN DIV PANEL DIV CONTAINS PANEL HEADING AND PANEL BODY
+PANEL BODY CONTAINS AN OUTSIDE CONTAINER DIV WHICH USES NG_SHOW displaySCF 
 </div>
