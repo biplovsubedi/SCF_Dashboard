@@ -1,14 +1,15 @@
-supplyChain = function(cin,$scope,$http){
-$scope.displaySCF = false;
-$scope.outputdatacin = "";
-$scope.outputdatatotal = "";
-$scope.outputdatapending = "";
-$scope.outputdatalast = "";
-    $http.get("https://9pded99twc.execute-api.ap-south-1.amazonaws.com/SCF_Test_1/scfresource?cin="+cin)
+supplyChain = function (cin, $scope, $http) {
+    $scope.displaySCF = false;
+    $scope.outputdatacin = "";
+    $scope.outputdatatotal = "";
+    $scope.outputdatapending = "";
+    $scope.outputdatalast = "";
+    $http.get("https://9pded99twc.execute-api.ap-south-1.amazonaws.com/SCF_Test_1/scfresource?cin=" + cin)
         .then(function successCallback(response) {
             $scope.displaySCF = true;
             var responsedata = response.data;
             $scope.outputdatacin = responsedata.cin;
+            $scope.outputvalid = responsedata.status.toLocaleString();
             $scope.outputdatatotal = responsedata.total_discounted.toLocaleString();
             $scope.outputdatapending = responsedata.pending_payments.toLocaleString();
             $scope.outputdatalast = responsedata.last_month.toLocaleString();
@@ -23,34 +24,35 @@ $scope.outputdatalast = "";
                 console.log(total_discounted);
 
                 var data = google.visualization.arrayToDataTable([
-            ['', '', {
-                        role: 'style'
-            }],
-            ['Paid', responsedata.total_discounted, 'green'], // English color name
-            ['Pending', responsedata.pending_payments, 'blue'], // CSS-style declaration
-            ['Last Month', responsedata.last_month, 'red'],
+            ['', 'In GBP(in Thousands)', { role: 'style' } ],
+            ['Discounted', responsedata.total_discounted, 'green'], // English color name
+             // CSS-style declaration
+            ['Paid Last Month', responsedata.last_month, '#0000ff'],
+            ['Pending', responsedata.pending_payments,'#ff0000']
         ]);
 
                 var options = {
-                    legend: { position: 'none' },
+                    legend: {
+                        position: 'none'
+                    },
                     width: '100%',
                     chart: {
-                        title: ' ',
+                        title: 'Invoice Amount',
                         subtitle: ''
                     },
                     bars: 'horizontal', // Required for Material Bar Charts.
-                    series: {
-                        0: {
-                            axis: 'distance'
-                        }, // Bind series 0 to an axis named 'distance'.
-                        1: {
-                            axis: 'brightness'
-                        } // Bind series 1 to an axis named 'brightness'.
-                    },
+//                    series: {
+//                        0: {
+//                            axis: 'distance'
+//                        }, // Bind series 0 to an axis named 'distance'.
+//                        1: {
+//                            axis: 'brightness'
+//                        } // Bind series 1 to an axis named 'brightness'.
+//                    },
                     axes: {
                         x: {
                             distance: {
-                                label: 'Amount in EUR (in Thosuands)'
+                                label: 'Amount in GBP (in Thosuands)'
                             }, // Bottom x-axis.
                             brightness: {
                                 side: 'top',
@@ -66,4 +68,4 @@ $scope.outputdatalast = "";
         }, function errorCallback(response) {
             console.log("GET Failed");
         });
-      }
+}
